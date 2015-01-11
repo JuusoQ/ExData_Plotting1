@@ -1,11 +1,11 @@
 datafile <- "https://d396qusza40orc.cloudfront.net/exdata%2Fdata%2Fhousehold_power_consumption.zip"
 #Download data and extract csv from it
-temp <- tempfile()
-download.file(datafile, destfile = temp,method="curl")
+#Valuable resource for this was: http://stackoverflow.com/questions/3053833/using-r-to-download-zipped-data-file-extract-and-import-data
+fn <- "zipfile"
+download.file(datafile, destfile = fn,method="curl")
 
 
-hpc <- read.table(unz(temp, "household_power_consumption.txt"), sep=";", header=TRUE,na.strings = "?",colClasses = c("character","character",rep("numeric",7)))
-
+hpc <- read.table(unz(fn, "household_power_consumption.txt"), sep=";", header=TRUE,na.strings = "?",colClasses = c("character","character","numeric","numeric","numeric","numeric","numeric","numeric","numeric"))
 
 hpc$DateTime <- paste(hpc$Date, hpc$Time, sep=" ")
 
